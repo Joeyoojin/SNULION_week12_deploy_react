@@ -7,6 +7,14 @@ axios.defaults.withCredentials = true;
 axios.defaults.headers.post["Content-Type"] = "application/json";
 axios.defaults.headers.common["X-CSRFToken"] = getCookie("csrftoken");
 
+// src/apis/axios.js
+
+if (process.env.NODE_ENV === 'development') {
+  axios.defaults.baseURL = "http://localhost:8000/api";
+} else {
+  axios.defaults.baseURL = "https://web-snulion-week12-deploy-react-dihik2mlizm4mus.sel4.cloudtype.app/api";
+}
+
 // 누구나 접근 가능한 API들
 export const instance = axios.create();
 
@@ -57,3 +65,5 @@ instanceWithToken.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+
